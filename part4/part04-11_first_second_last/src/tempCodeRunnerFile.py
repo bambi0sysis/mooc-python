@@ -1,0 +1,1 @@
+print(word, string, i, end = "\n")
