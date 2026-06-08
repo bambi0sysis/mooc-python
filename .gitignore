@@ -183,3 +183,5 @@ __pycache__/
 *.pyc
 .DS_Store
 .tmc/
+temp*.py
+*.pyc
