@@ -1,14 +1,14 @@
 # second try to make it better. is it better? i wonder!
 def is_valid_line(line: str) -> bool:
-    line = line.split(';')
+    line = line.split(";")
     header = line[0]
-    data = line[1].split(',')
+    data = line[1].split(",")
 
     try:
-        header_num = int(header.split(' ')[1])
+        header_num = int(header.split(" ")[1])
         if len(data) != 7:
             return False
-        data = [int(n) for n in line[1].split(',')]
+        data = [int(n) for n in line[1].split(",")]
         if max(data) > 39 or min(data) < 1:
             return False
         if len(set(data)) != len(data):
@@ -18,11 +18,15 @@ def is_valid_line(line: str) -> bool:
     except ValueError:
         return False
 
+
 def filter_incorrect():
-    with open('lottery_numbers.csv') as file, open('correct_numbers.csv', 'w') as w_file:
+    with (
+        open("lottery_numbers.csv") as file,
+        open("correct_numbers.csv", "w") as w_file,
+    ):
         for line in file:
             if is_valid_line(line):
-                w_file.write(line + '\n')
+                w_file.write(line)
 
 
 # first try that passed the tmc
@@ -54,6 +58,6 @@ def filter_incorrect():
 #                         break
 #             except ValueError:
 #                 check = False
-            
+
 #             if check:
 #                 file.write(f'{week[0]};' + ','.join(week[1:]))
