@@ -18,5 +18,5 @@ class ShoppingList:
 def total_units(my_list: ShoppingList):
     units = 0
     for i in range(my_list.number_of_items()):
-        units += my_list.amount(i)
+        units += my_list.amount(i + 1)
     return units
