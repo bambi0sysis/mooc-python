@@ -1,3 +1,6 @@
-# Write your solution here
-# Remember the import statement
-# from datetime import date
+def list_years(dates: list):
+    lst = []
+    for day in dates:
+        lst.append(day.year)
+    lst.sort()
+    return lst
