@@ -1,11 +1,8 @@
-# DO NOT CHANGE CLASS Book!
-# Write your solution after the class!
-
 class Book:
     def __init__(self, name: str, author: str, genre: str, year: int):
         self.name = name
         self.author = author
-        self.genre = genre 
+        self.genre = genre
         self.year = year
 
     ##STUB:# This enables easy printing of a Book object
@@ -13,6 +10,9 @@ class Book:
         return f"{self.name} ({self.author}), {self.year} - genre: {self.genre}"
 
 
-# -----------------------------
-# Write your solution here
-# -----------------------------
+def books_of_genre(books: list, genre: str):
+    same_genre_books = []
+    for book in books:
+        if book.genre == genre:
+            same_genre_books.append(book)
+    return same_genre_books
