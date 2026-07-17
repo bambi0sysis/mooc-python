@@ -7,4 +7,16 @@ class ClimbingRoute:
     def __str__(self):
         return f"{self.name}, length {self.length} metres, grade {self.grade}"
 
-# Write your solution herer:
+
+def sort_by_length(routes: list):
+    def length(r: ClimbingRoute):
+        return r.length
+
+    return sorted(routes, key=length, reverse=True)
+
+
+def sort_by_difficulty(routes: list):
+    def hardest(route: ClimbingRoute):
+        return route.grade, route.length
+
+    return sorted(routes, key=hardest, reverse=True)
