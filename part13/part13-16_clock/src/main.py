@@ -1,48 +1,38 @@
 import pygame
-import math
 from datetime import datetime
+import math
 
 pygame.init()
+window = pygame.display.set_mode((640, 480))
 width, height = 640, 480
-screen = pygame.display.set_mode((width, height))
-
-
-def circle(color: int, radius: int):
-    pygame.draw.circle(screen, color, (middle_x, middle_y), radius)
-
-
-def hand(length: int, thickness: int, proportion: float):
-    angle = 2 * math.pi * proportion - math.pi / 2
-    end_x = middle_x + math.cos(angle) * length
-    end_y = middle_y + math.sin(angle) * length
-
-    pygame.draw.line(
-        screen, (0, 0, 255), (middle_x, middle_y), (end_x, end_y), thickness
-    )
 
 
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             exit()
+    now = datetime.now()
+    hours, minutes, seconds = now.hour, now.minute, now.second
+    pygame.display.set_caption(f"{hours}:{minutes}:{seconds}")
+    window.fill((0, 0, 0))
 
-    hours = datetime.now().hour % 12
-    minutes = datetime.now().minute
-    seconds = datetime.now().second
+    pygame.draw.circle(window, (255, 0, 0), (width / 2, height / 2), 10)
+    pygame.draw.circle(window, (255, 0, 0), (width / 2, height / 2), 200, 5)
 
-    pygame.display.set_caption(str(datetime.now().time())[:8])
+    sec_angle = (seconds / 60) * 2 * math.pi - math.pi / 2
+    sec_x = width / 2 + 185 * math.cos(sec_angle)
+    sec_y = height / 2 + 185 * math.sin(sec_angle)
 
-    screen.fill((0, 0, 0))
+    min_angle = ((minutes + seconds / 60) / 60) * 2 * math.pi - math.pi / 2
+    min_x = width / 2 + 180 * math.cos(min_angle)
+    min_y = height / 2 + 180 * math.sin(min_angle)
 
-    middle_x = width / 2
-    middle_y = height / 2
+    hr_angle = ((hours % 12 + minutes / 60) / 12) * 2 * math.pi - math.pi / 2
+    hr_x = width / 2 + 150 * math.cos(hr_angle)
+    hr_y = height / 2 + 150 * math.sin(hr_angle)
 
-    circle((255, 0, 0), 200)
-    circle((0, 0, 0), 195)
-    circle((255, 0, 0), 10)
-
-    hand(185, 1, seconds / 60)
-    hand(180, 2, (minutes + seconds / 60) / 60)
-    hand(150, 5, (hours + minutes / 60 + seconds / 3600) / 12)
+    pygame.draw.line(window, (0, 0, 255), (width / 2, height / 2), (hr_x, hr_y), 4)
+    pygame.draw.line(window, (0, 0, 255), (width / 2, height / 2), (min_x, min_y), 3)
+    pygame.draw.line(window, (0, 0, 255), (width / 2, height / 2), (sec_x, sec_y), 2)
 
     pygame.display.flip()
